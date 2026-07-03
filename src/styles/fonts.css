@@ -1,0 +1,44 @@
+@theme {
+  --font-nanumsquare: "NanumSquare", sans-serif;
+}
+
+/* 타이포그래피 스케일 (font-family/weight/size) */
+@utility text-20-bold {
+  font-family: var(--font-nanumsquare);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0%;
+}
+
+@utility text-18-bold {
+  font-family: var(--font-nanumsquare);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: 0%;
+}
+
+@utility text-16-extrabold {
+  font-family: var(--font-nanumsquare);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0%;
+}
+
+@utility text-16-bold {
+  font-family: var(--font-nanumsquare);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0%;
+}
+
+@utility text-16-regular {
+  font-family: var(--font-nanumsquare);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0%;
+}
