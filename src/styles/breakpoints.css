@@ -1,0 +1,7 @@
+/* 브레이크포인트 재정의: small(375) / medium(744) / large(1920) */
+
+@theme {
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 744px;
+  --breakpoint-lg: 1920px;
+}
