@@ -31,7 +31,7 @@ export default function Button({
   const { icon: Icon, bg, text } = VARIANTS[variant];
   const isAddVariant = variant === "add" || variant === "addActive";
   const size = isAddVariant
-    ? "w-41 h-13 max-[375px]:w-14 max-[375px]:h-14"
+    ? "w-14 h-14 sm:w-41 sm:h-13"
     : "w-41 h-13";
 
   return (
@@ -44,7 +44,7 @@ export default function Button({
       >
         <Icon />
         <span
-          className={`text-16-bold ${isAddVariant ? "max-[375px]:hidden" : ""}`}
+          className={`text-16-bold ${isAddVariant ? "hidden sm:inline" : ""}`}
         >
           {children}
         </span>
