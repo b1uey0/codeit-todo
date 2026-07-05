@@ -1,14 +1,16 @@
 "use client";
 
-import { InputHTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, MouseEvent, ReactNode } from "react";
+import { useRouter } from "next/navigation";
 
 import IcCheckboxOff from "@/../public/icons/checkbox.svg";
 import IcCheckboxOn from "@/../public/icons/checkbox-checked.svg";
 
 interface CheckListItemProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size" | "onChange" | "children"
+  HTMLAttributes<HTMLDivElement>,
+  "onChange" | "children" | "onClick"
 > {
+  id: string;
   children: ReactNode;
   checked: boolean;
   onChange: (checked: boolean) => void;
@@ -33,6 +35,7 @@ const VARIANTS = {
 };
 
 export default function CheckListItem({
+  id,
   children,
   checked,
   onChange,
@@ -40,26 +43,35 @@ export default function CheckListItem({
   className,
   ...props
 }: CheckListItemProps) {
+  const router = useRouter();
   const { shape, checkedStyle, text, checkedText } = VARIANTS[variant];
   const Icon = checked ? IcCheckboxOn : IcCheckboxOff;
 
+  const handleCheckboxClick = (e: MouseEvent) => {
+    e.stopPropagation();
+    onChange(!checked);
+  };
+
   return (
-    <label
+    <div
+      onClick={() => router.push(`/items/${id}`)}
       className={`flex items-center gap-3 w-full px-4 border-2 border-slate-900 cursor-pointer ${shape} ${
         checked ? checkedStyle : "bg-white"
       } ${className ?? ""}`}
+      {...props}
     >
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-        className="sr-only"
-        {...props}
-      />
-      <Icon className="shrink-0" />
+      <button
+        type="button"
+        role="checkbox"
+        aria-checked={checked}
+        onClick={handleCheckboxClick}
+        className="shrink-0"
+      >
+        <Icon />
+      </button>
       <span className={`${text} ${checked ? checkedText : ""}`}>
         {children}
       </span>
-    </label>
+    </div>
   );
 }
