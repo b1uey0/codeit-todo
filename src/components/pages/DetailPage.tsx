@@ -16,6 +16,7 @@ interface DetailPageProps {
   id: string;
 }
 
+// 상세 페이지("/items/[id]") - 할 일을 id 값에 맞춰 불러와, 이름 / 메모 / 이미지 / 완료 여부를 수정, 삭제까지 담당합니다.
 export default function DetailPage({ id }: DetailPageProps) {
   const router = useRouter();
 
@@ -25,6 +26,7 @@ export default function DetailPage({ id }: DetailPageProps) {
   const [memo, setMemo] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
+  // id 값이 바뀔 때마다 (다른 항목 상세로 진입할 때마다), 해당 항목 데이터를 새로 불러와서 폼에 채웁니다.
   useEffect(() => {
     getItem(Number(id))
       .then((item) => {
@@ -37,6 +39,7 @@ export default function DetailPage({ id }: DetailPageProps) {
       .finally(() => setIsLoading(false));
   }, [id]);
 
+  // 이미지 업로드 버튼에서 파일 선택 시 실행 - 유효성 체크 후 미리보기를 먼저 띄우고 업로드합니다.
   const handleImageSelect = async (file: File, previewUrl: string) => {
     const isEnglishFileName = /^[a-zA-Z0-9_.-]+$/.test(file.name);
     if (!isEnglishFileName) {
@@ -48,7 +51,7 @@ export default function DetailPage({ id }: DetailPageProps) {
       return;
     }
 
-    // 업로드 끝날 때까지는 미리보기부터 보여줌
+    // 업로드가 끝날 때까지는 미리보기부터 보여줍니다.
     setImageUrl(previewUrl);
 
     try {
@@ -60,6 +63,8 @@ export default function DetailPage({ id }: DetailPageProps) {
     }
   };
 
+  // [수정 완료] 버튼 클릭 시 현재 폼 상태를 서버에 반영하고 '메인(/)'으로 이동합니다.
+  // imageUrl이 없으면(=업로드를 하지 않은 경우.) 필드 자체를 보내지 않고, 기존 이미지를 유지합니다.
   const handleSubmit = async () => {
     try {
       await updateItem(Number(id), {
@@ -75,6 +80,7 @@ export default function DetailPage({ id }: DetailPageProps) {
     }
   };
 
+  // [삭제하기] 버튼 클릭 시 항목을 삭제하고 '메인(/)'으로 이동합니다.
   const handleDelete = async () => {
     try {
       await deleteItem(Number(id));
