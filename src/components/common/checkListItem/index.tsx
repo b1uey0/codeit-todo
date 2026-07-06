@@ -18,19 +18,22 @@ interface CheckListItemProps extends Omit<
 }
 
 const VARIANTS = {
-  // 메인 페이지 목록에서 사용하는 pill 형태
+  // 메인 페이지 Item
   list: {
     shape: "rounded-[27px] h-12.5",
     checkedStyle: "bg-violet-200",
     text: "text-16-regular",
     checkedText: "line-through",
+    contentWrapper: "",
   },
-  // 상세 페이지에서 사용하는 카드 형태
+  // 상세 페이지 Item
   detail: {
     shape: "rounded-3xl h-16 justify-center",
     checkedStyle: "bg-violet-200",
     text: "text-16-bold",
     checkedText: "underline",
+    // input이 실제 너비를 가질 수 있도록 span이 남은 공간을 채우게 함
+    contentWrapper: "flex-1 min-w-0",
   },
 };
 
@@ -44,7 +47,8 @@ export default function CheckListItem({
   ...props
 }: CheckListItemProps) {
   const router = useRouter();
-  const { shape, checkedStyle, text, checkedText } = VARIANTS[variant];
+  const { shape, checkedStyle, text, checkedText, contentWrapper } =
+    VARIANTS[variant];
   const Icon = checked ? IcCheckboxOn : IcCheckboxOff;
 
   const handleCheckboxClick = (e: MouseEvent) => {
@@ -69,7 +73,9 @@ export default function CheckListItem({
       >
         <Icon />
       </button>
-      <span className={`${text} ${checked ? checkedText : ""}`}>
+      <span
+        className={`${text} ${checked ? checkedText : ""} ${contentWrapper}`}
+      >
         {children}
       </span>
     </div>
