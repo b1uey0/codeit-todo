@@ -13,11 +13,13 @@ import EmptyCheckList from "../common/emptyCheckList";
 import { createItem, getItems, updateItem } from "@/lib/api/items";
 import type { Item } from "@/types/item";
 
+// 메인 페이지("/") - 할 일 목록을 불러와서 todo / done으로 나눠 보여주고, 추가 / 완료 토글 기능을 담당합니다.
 export default function MainPage() {
   const [items, setItems] = useState<Item[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [newTodoName, setNewTodoName] = useState("");
 
+  // 마운트될 때 한 번만 전체 목록을 가져옵니다. (최대 100개까지)
   useEffect(() => {
     getItems({ page: 1, pageSize: 100 })
       .then(setItems)
@@ -25,6 +27,7 @@ export default function MainPage() {
       .finally(() => setIsLoading(false));
   }, []);
 
+  // 검색바 옆 [추가하기] 버튼 클릭 시 새 할 일을 생성합니다.
   const handleAddTodo = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -41,8 +44,9 @@ export default function MainPage() {
     }
   };
 
+  // 체크리스트 아이템의 완료 여부 토글 기능입니다. (todo <-> done 이동)
   const handleToggle = async (item: Item, checked: boolean) => {
-    // 우선 화면부터 바꾸고, API가 실패하면 원래 상태
+    // 우선 화면부터 바꾸고, API가 실패하면 원래 상태로 돌아옵니다.
     setItems((prev) =>
       prev.map((it) =>
         it.id === item.id ? { ...it, isCompleted: checked } : it,
@@ -61,6 +65,7 @@ export default function MainPage() {
     }
   };
 
+  // isCompleted 기준으로 todo / done 두 컬럼에 나눠 담습니다.
   const todoItems = items.filter((item) => !item.isCompleted);
   const doneItems = items.filter((item) => item.isCompleted);
 

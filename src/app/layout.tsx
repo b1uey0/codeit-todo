@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   description: "개인 할 일 관리를 위한 투두 서비스",
 };
 
+// 모든 페이지를 감싸는 루트 레이아웃
+// GNB(상단 네비게이션)를 깔아줍니다.
 export default function RootLayout({
   children,
 }: Readonly<{
