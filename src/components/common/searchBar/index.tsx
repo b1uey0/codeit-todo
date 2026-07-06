@@ -1,9 +1,6 @@
 import { InputHTMLAttributes } from "react";
 
-interface SearchBarProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size"
-> {}
+type SearchBarProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size">;
 
 export default function SearchBar({ className, ...props }: SearchBarProps) {
   return (
