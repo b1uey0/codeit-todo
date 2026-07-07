@@ -2,6 +2,8 @@ import { InputHTMLAttributes } from "react";
 
 type SearchBarProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size">;
 
+// 할 일 이름 입력창 - MainPage 상단에서 새 항목 추가 시 사용합니다.
+// value/onChange 등은 상위(form)에서 props로 그대로 내려받아 제어합니다.
 export default function SearchBar({ className, ...props }: SearchBarProps) {
   return (
     <div className={`relative w-full h-14 ${className ?? ""}`}>

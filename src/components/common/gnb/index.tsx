@@ -3,6 +3,8 @@ import Link from "next/link";
 import LogoLg from "@/../public/images/logo-lg.svg";
 import LogoSm from "@/../public/images/logo-sm.svg";
 
+// 전역 상단 네비게이션 바 - RootLayout에서 모든 페이지에 공통으로 깔아줍니다.
+// 로고를 누르면 메인("/")으로 이동합니다.
 export default function Gnb() {
   return (
     <header className="sticky top-0 z-50 flex items-center h-15 px-4 md:pl-6 lg:pl-90 border-b border-slate-200 bg-white">

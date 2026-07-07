@@ -70,7 +70,7 @@ export default function MainPage() {
   const doneItems = items.filter((item) => item.isCompleted);
 
   return (
-    <div className="flex flex-col justify-center pt-8 px-4 md:px-6 lg:px-90 gap-4 md:gap-8 lg:gap-12">
+    <main className="flex flex-col justify-center pt-8 px-4 md:px-6 lg:px-90 gap-4 md:gap-8 lg:gap-12">
       {/** Search-Bar / todo-list 추가 btn 레이아웃 */}
       <form onSubmit={handleAddTodo} className="flex gap-3 sm:gap-4">
         <SearchBar
@@ -98,17 +98,19 @@ export default function MainPage() {
             {todoItems.length === 0 ? (
               <EmptyCheckList variant="todo" />
             ) : (
-              todoItems.map((item) => (
-                <CheckListItem
-                  key={item.id}
-                  id={String(item.id)}
-                  variant="list"
-                  checked={item.isCompleted}
-                  onChange={(checked) => handleToggle(item, checked)}
-                >
-                  {item.name}
-                </CheckListItem>
-              ))
+              <ul className="flex flex-col gap-4">
+                {todoItems.map((item) => (
+                  <CheckListItem
+                    key={item.id}
+                    id={String(item.id)}
+                    variant="list"
+                    checked={item.isCompleted}
+                    onChange={(checked) => handleToggle(item, checked)}
+                  >
+                    {item.name}
+                  </CheckListItem>
+                ))}
+              </ul>
             )}
           </div>
           {/** 활성화 후 - done */}
@@ -117,21 +119,23 @@ export default function MainPage() {
             {doneItems.length === 0 ? (
               <EmptyCheckList variant="done" />
             ) : (
-              doneItems.map((item) => (
-                <CheckListItem
-                  key={item.id}
-                  id={String(item.id)}
-                  variant="list"
-                  checked={item.isCompleted}
-                  onChange={(checked) => handleToggle(item, checked)}
-                >
-                  {item.name}
-                </CheckListItem>
-              ))
+              <ul className="flex flex-col gap-4">
+                {doneItems.map((item) => (
+                  <CheckListItem
+                    key={item.id}
+                    id={String(item.id)}
+                    variant="list"
+                    checked={item.isCompleted}
+                    onChange={(checked) => handleToggle(item, checked)}
+                  >
+                    {item.name}
+                  </CheckListItem>
+                ))}
+              </ul>
             )}
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }

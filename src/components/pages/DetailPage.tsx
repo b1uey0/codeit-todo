@@ -93,14 +93,14 @@ export default function DetailPage({ id }: DetailPageProps) {
 
   if (isLoading) {
     return (
-      <div className="flex w-full justify-center pt-8 px-1 md:px-6 lg:px-90">
+      <main className="flex w-full justify-center pt-8 px-1 md:px-6 lg:px-90">
         <p className="text-16-regular text-slate-400">불러오는 중...</p>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="flex flex-col w-full pt-8 px-1 md:px-6 lg:px-90 pb-10 gap-6">
+    <main className="flex flex-col w-full pt-8 px-1 md:px-6 lg:px-90 pb-10 gap-6">
       <CheckListItem
         id={id}
         variant="detail"
@@ -162,6 +162,6 @@ export default function DetailPage({ id }: DetailPageProps) {
           삭제하기
         </Button>
       </div>
-    </div>
+    </main>
   );
 }
