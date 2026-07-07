@@ -4,7 +4,7 @@
 
 ## 데모
 
-- 배포 링크: (배포 후 추가)
+- 배포 링크: [codeit-todo-yeeunj.vercel.app](https://codeit-todo-yeeunj.vercel.app/)
 
 ## 주요 기능
 
