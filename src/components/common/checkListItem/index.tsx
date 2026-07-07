@@ -7,7 +7,7 @@ import IcCheckboxOff from "@/../public/icons/checkbox.svg";
 import IcCheckboxOn from "@/../public/icons/checkbox-checked.svg";
 
 interface CheckListItemProps extends Omit<
-  HTMLAttributes<HTMLDivElement>,
+  HTMLAttributes<HTMLElement>,
   "onChange" | "children" | "onClick"
 > {
   id: string;
@@ -50,6 +50,8 @@ export default function CheckListItem({
   const { shape, checkedStyle, text, checkedText, contentWrapper } =
     VARIANTS[variant];
   const Icon = checked ? IcCheckboxOn : IcCheckboxOff;
+  // 메인 목록(list)에서는 <ul>의 항목이라 <li>로, 상세페이지(detail)에서는 단독 카드라 <div>로 렌더링합니다.
+  const Tag = variant === "list" ? "li" : "div";
 
   const handleCheckboxClick = (e: MouseEvent) => {
     e.stopPropagation();
@@ -57,7 +59,7 @@ export default function CheckListItem({
   };
 
   return (
-    <div
+    <Tag
       onClick={() => router.push(`/items/${id}`)}
       className={`flex items-center gap-3 w-full px-4 border-2 border-slate-900 cursor-pointer ${shape} ${
         checked ? checkedStyle : "bg-white"
@@ -78,6 +80,6 @@ export default function CheckListItem({
       >
         {children}
       </span>
-    </div>
+    </Tag>
   );
 }
